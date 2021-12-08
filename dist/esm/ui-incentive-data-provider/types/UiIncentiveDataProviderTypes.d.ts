@@ -29,11 +29,15 @@ export interface IncentiveDataHumanized {
     incentiveControllerAddress: string;
     rewardTokenDecimals: number;
     precision: number;
-}
-export interface IncentivesWithFeeds extends IncentiveDataHumanized {
-    priceFeed: string;
-    priceFeedTimestamp: number;
-    priceFeedDecimals: number;
+    0: BigNumber;
+    1: BigNumber;
+    2: BigNumber;
+    3: BigNumber;
+    4: string;
+    5: string;
+    6: string;
+    7: number;
+    8: number;
 }
 export interface IncentiveUserData {
     tokenincentivesUserIndex: BigNumber;
@@ -48,14 +52,6 @@ export interface IncentiveUserData {
     3: string;
     4: string;
     5: number;
-}
-export interface IncentiveUserDataHumanized {
-    tokenIncentivesUserIndex: string;
-    userUnclaimedRewards: string;
-    tokenAddress: string;
-    rewardTokenAddress: string;
-    incentiveControllerAddress: string;
-    rewardTokenDecimals: number;
 }
 export interface ReserveIncentiveDataResponse {
     underlyingAsset: string;
@@ -72,12 +68,10 @@ export interface ReserveIncentiveDataHumanizedResponse {
     aIncentiveData: IncentiveDataHumanized;
     vIncentiveData: IncentiveDataHumanized;
     sIncentiveData: IncentiveDataHumanized;
-}
-export interface ReserveIncentiveWithFeedsResponse {
-    underlyingAsset: string;
-    aIncentiveData: IncentivesWithFeeds;
-    vIncentiveData: IncentivesWithFeeds;
-    sIncentiveData: IncentivesWithFeeds;
+    0: string;
+    1: IncentiveData;
+    2: IncentiveData;
+    3: IncentiveData;
 }
 export interface UserReserveIncentiveDataResponse {
     underlyingAsset: string;
@@ -88,12 +82,6 @@ export interface UserReserveIncentiveDataResponse {
     1: IncentiveUserData;
     2: IncentiveUserData;
     3: IncentiveUserData;
-}
-export interface UserReserveIncentiveDataHumanizedResponse {
-    underlyingAsset: string;
-    aTokenIncentivesUserData: IncentiveUserDataHumanized;
-    vTokenIncentivesUserData: IncentiveUserDataHumanized;
-    sTokenIncentivesUserData: IncentiveUserDataHumanized;
 }
 export interface FullReservesIncentiveDataResponse {
     0: ReserveIncentiveDataResponse[];

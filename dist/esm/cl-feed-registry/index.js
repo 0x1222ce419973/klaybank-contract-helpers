@@ -1,4 +1,5 @@
 import { isAddress } from 'ethers/lib/utils';
+// eslint-disable-next-line @typescript-eslint/camelcase
 import { FeedRegistryInterface__factory } from './typechain/FeedRegistryInterface__factory';
 import { DenominationAddresses, } from './types/ChainlinkFeedsRegistryTypes';
 export * from './types/ChainlinkFeedsRegistryTypes';
@@ -14,7 +15,7 @@ export class ChainlinkFeedsRegistry {
             if (!isAddress(tokenAddress)) {
                 throw new Error('tokenAddress is not valid');
             }
-            return this._registryContract.decimals(tokenAddress, DenominationAddresses[quote]);
+            return this._registryContract.decimals(tokenAddress, quote);
         };
         this.getPriceFeed = async (tokenAddress, quote) => {
             const rawFeed = await this.latestRoundData(tokenAddress, quote);
@@ -28,6 +29,7 @@ export class ChainlinkFeedsRegistry {
         if (!isAddress(chainlinkFeedsRegistry)) {
             throw new Error('contract address is not valid');
         }
+        // eslint-disable-next-line @typescript-eslint/camelcase
         this._registryContract = FeedRegistryInterface__factory.connect(chainlinkFeedsRegistry, provider);
     }
 }

@@ -15,7 +15,7 @@ export class PermissionManager {
         return this._contract.getUserPermissions(user);
     }
     async getHumanizedUserPermissions(user) {
-        const { 0: permissions, 1: permissionsNumber } = await this.getUserPermissions(user);
+        const { 0: permissions, 1: permissionsNumber, } = await this.getUserPermissions(user);
         const parsedPermissions = [];
         permissions.forEach((permission, index) => {
             if (index < permissionsNumber.toNumber()) {

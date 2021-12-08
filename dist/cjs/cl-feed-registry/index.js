@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ChainlinkFeedsRegistry = void 0;
 const tslib_1 = require("tslib");
 const utils_1 = require("ethers/lib/utils");
+// eslint-disable-next-line @typescript-eslint/camelcase
 const FeedRegistryInterface__factory_1 = require("./typechain/FeedRegistryInterface__factory");
 const ChainlinkFeedsRegistryTypes_1 = require("./types/ChainlinkFeedsRegistryTypes");
 (0, tslib_1.__exportStar)(require("./types/ChainlinkFeedsRegistryTypes"), exports);
@@ -18,7 +19,7 @@ class ChainlinkFeedsRegistry {
             if (!(0, utils_1.isAddress)(tokenAddress)) {
                 throw new Error('tokenAddress is not valid');
             }
-            return this._registryContract.decimals(tokenAddress, ChainlinkFeedsRegistryTypes_1.DenominationAddresses[quote]);
+            return this._registryContract.decimals(tokenAddress, quote);
         };
         this.getPriceFeed = async (tokenAddress, quote) => {
             const rawFeed = await this.latestRoundData(tokenAddress, quote);
@@ -32,6 +33,7 @@ class ChainlinkFeedsRegistry {
         if (!(0, utils_1.isAddress)(chainlinkFeedsRegistry)) {
             throw new Error('contract address is not valid');
         }
+        // eslint-disable-next-line @typescript-eslint/camelcase
         this._registryContract = FeedRegistryInterface__factory_1.FeedRegistryInterface__factory.connect(chainlinkFeedsRegistry, provider);
     }
 }
