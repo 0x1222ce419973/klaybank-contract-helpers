@@ -1,13 +1,19 @@
 import { providers } from 'ethers';
-import { ReserveDataResponse, UserReserveDataResponse, AllReserveDataResponse } from './types/UiPoolDataProviderTypes';
+import { ReservesData, UserReserveData, ReservesDataHumanized, UserReserveDataHumanized } from './types/UiPoolDataProviderTypes';
+export * from './types/UiPoolDataProviderTypes';
 export interface UiPoolDataProviderContext {
     uiPoolDataProviderAddress: string;
-    lendingPoolAddressProvider: string;
     provider: providers.Provider;
 }
-export declare class UiPoolDataProvider {
+export interface UiPoolDataProviderInterface {
+    getReservesList: (lendingPoolAddressProvider: string) => Promise<string[]>;
+    getReservesData: (lendingPoolAddressProvider: string) => Promise<ReservesData>;
+    getUserReservesData: (lendingPoolAddressProvider: string, user: string) => Promise<UserReserveData[]>;
+    getReservesHumanized: (lendingPoolAddressProvider: string) => Promise<ReservesDataHumanized>;
+    getUserReservesHumanized: (lendingPoolAddressProvider: string, user: string) => Promise<UserReserveDataHumanized[]>;
+}
+export declare class UiPoolDataProvider implements UiPoolDataProviderInterface {
     private readonly _contract;
-    private readonly _lendingPoolAddressProvider;
     /**
      * Constructor
      * @param context The ui pool data provider context
@@ -16,18 +22,16 @@ export declare class UiPoolDataProvider {
     /**
      * Get the underlying asset address for each lending pool reserve
      */
-    getReservesList(): Promise<string[]>;
+    getReservesList(lendingPoolAddressProvider: string): Promise<string[]>;
     /**
      * Get data for each lending pool reserve
      */
-    getReserves(): Promise<ReserveDataResponse[]>;
+    getReservesData(lendingPoolAddressProvider: string): Promise<ReservesData>;
     /**
      * Get data for each user reserve on the lending pool
      */
-    getUserReserves(user: string): Promise<UserReserveDataResponse[]>;
-    /**
-     * Get data for each lending pool reserve and user reserve
-     */
-    getAllReserves(user: string): Promise<AllReserveDataResponse>;
+    getUserReservesData(lendingPoolAddressProvider: string, user: string): Promise<UserReserveData[]>;
+    getReservesHumanized(lendingPoolAddressProvider: string): Promise<ReservesDataHumanized>;
+    getUserReservesHumanized(lendingPoolAddressProvider: string, user: string): Promise<UserReserveDataHumanized[]>;
 }
 //# sourceMappingURL=index.d.ts.map
